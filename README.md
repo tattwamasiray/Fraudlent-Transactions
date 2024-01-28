@@ -1,8 +1,8 @@
 # Project 4 [![Presentation-Fraudulent](https://img.shields.io/badge/Presentation-Fraudulent-black?style=flat&logo=codereview)](https://docs.google.com/presentation/d/1BzXgtBJl6xi0m6Rl9t7ku_83Ji0DmChB/edit?usp=sharing&ouid=109196441157952287856&rtpof=true&sd=true)
 ## Building a Web Application To Predict Fraudulent Credit Card Transactions
-### Project Team: Gal Beeri, Mireille Walton and Katharine Tamas
+###Contributor: Tattwamasi Ray
 
-In this scenario, our team has built an interactive web application where end users can upload a csv file containing credit card transactions, and through a machine learning model we can predict if a transaction is likely to be fraudulent or not. 
+In this scenario, I had built an interactive web application where end users can upload a csv file containing credit card transactions, and through a machine learning model we can predict if a transaction is likely to be fraudulent or not. 
 
 Our dataset consisted of two csv files containing over 1.8 million credit card transactions, with transaction dates from January 2019 to December 2020 inclusive. The credit card holders all resided within the United States. This dataset was simulated using the Markov Chain method (https://github.com/namebrandon/Sparkov_Data_Generation/tree/master), which is a mathematical model used to describe a sequence of events where the outcome of each event depends only on the outcome of the previous event. 
 
@@ -60,9 +60,9 @@ https://www.kaggle.com/datasets/kartik2112/fraud-detection
 
 **Key Data Insights:**
 
-In this step, we consolidated two Kaggle CSV files and conducted data exploration using Tableau Public, yielding the following key insights:
+In this step, I consolidated two Kaggle CSV files and conducted data exploration using Tableau Public, yielding the following key insights:
 
-1. Only 0.52% of the dataset contained fraudulent transactions, in line with the Markov model's assumption of a fraudulent transaction every 7 days.
+1. Only 0.52% of the dataset contained fraudulent transactions, in line with the model's assumption of a fraudulent transaction every 7 days.
 2. Gender distribution was evenly split between both fraudulent and non-fraudulent transactions.
 3. The "Gas_Transport" category had the highest transaction volume, but "Grocery_POS" topped the list for fraudulent transactions.
 4. Regular transactions exhibited a cyclic pattern, peaking in December due to holiday spending. They were most common on Mondays, occurring from midday to midnight.
@@ -76,7 +76,7 @@ https://public.tableau.com/views/Project4-CreditCardFraud_EDA/Presentation?:lang
 
 **EDA and Data Preprocessing:**
 
-In our analysis, we conducted extensive Exploratory Data Analysis (EDA) and data preprocessing within a Jupyter Notebook environment. We combined two datasets to create a comprehensive dataset, which, fortunately, required minimal cleaning. Notably, there were no missing values in our dataset. 
+In this analysis, I conducted extensive Exploratory Data Analysis (EDA) and data preprocessing within a Jupyter Notebook environment. We combined two datasets to create a comprehensive dataset, which, fortunately, required minimal cleaning. Notably, there were no missing values in our dataset. 
 
 We made some key decisions to prepare the data for machine modelling:
 1. **Feature Removal**: We decided to exclude the 'Credit card number' and 'Transaction number' columns since these are randomly generated and hold no predictive value for fraud detection.
@@ -86,7 +86,7 @@ We made some key decisions to prepare the data for machine modelling:
 Our main goal was to limit our feature set to a maximum of 19 variables to prevent overfitting.
 
 Lastly, we checked for linear relationships between the features and target variable “is_fraud”, using the Pearson correlation coefficient.
-In our investigation, we found that, as is often the case in fraud detection, there were very few significant correlations between our features and the 'is_fraud' target variable. This is because fraudulent activities are intentionally made to look like regular transactions and avoid obvious patterns.
+In my investigation, I found that, as is often the case in fraud detection, there were very few significant correlations between our features and the 'is_fraud' target variable. This is because fraudulent activities are intentionally made to look like regular transactions and avoid obvious patterns.
 Our approach acknowledges this absence of correlation and relies on machine learning models to spot subtle deviations from the norm, which helps us effectively identify fraudulent transactions. 
 
 
@@ -113,7 +113,7 @@ Our approach acknowledges this absence of correlation and relies on machine lear
 ### Part 2: Supervised Machine Learning Models
 
 **Assumption and Overview**
-Since we aim to predict fraudulent transactions based on the ‘fraud_encoded’ dataset, we will evaluate two Machine Learning models that could produce accurate results. The main metric we will consider when running **confusion metrics is recall**, as the main aim is to identify fraudulent transactions with high accuracy.
+Since I aim to predict fraudulent transactions based on the ‘fraud_encoded’ dataset, we will evaluate two Machine Learning models that could produce accurate results. The main metric I will consider when running **confusion metrics is recall**, as the main aim is to identify fraudulent transactions with high accuracy.
 <br>
 The models evaluated were:
 1. Logistic regression -> As it predicts a binary result.
@@ -123,12 +123,12 @@ The models evaluated were:
 *Decision tree* is likely to perform better as our data cleansing, manipulation, and engineering indicated that there is no correlation coefficient between a feature in the dataset and the target column ‘is_fraud’ feature. Therefore, multiple features will need to be evaluated together to result in a fraudulent/non-fraudulent transaction.
 
 ### Creating a logistic regression model
-We ran a logistic regression model with the `lbfgs` solver, with no other specifications. The results of the model from the confusion matrix and the classification report (0 accuracy score for precision, recall, and f1 scores) indicated that logistic regression performs poorly in identifying fraudulent transactions.
+I ran a logistic regression model with the `lbfgs` solver, with no other specifications. The results of the model from the confusion matrix and the classification report (0 accuracy score for precision, recall, and f1 scores) indicated that logistic regression performs poorly in identifying fraudulent transactions.
 
 ### Decision Tree Model
-To evaluate the decision tree model, we took the following approaches:
+To evaluate the decision tree model, I took the following approaches:
 
-1. **Model 1:** Running a “default” decision tree model and comparing it to the logistic regression model, assuming we receive better results, we move on with the evaluation methods below.
+1. **Model 1:** Running a “default” decision tree model and comparing it to the logistic regression model, assuming I receive better results, I move on with the evaluation methods below.
 
 ![image](https://github.com/Kokolipa/fraudulent_transactions/assets/132874272/4dccab4a-d5e9-4628-90c2-07951aa2b40a)
 
@@ -174,11 +174,11 @@ To evaluate the decision tree model, we took the following approaches:
 
 ![image](https://github.com/Kokolipa/fraudulent_transactions/assets/132874272/532ab7f8-e4f0-497b-931d-9360a0863132)
 
-5. **Model 4:** Here, we created a balanced dataset. We used the X_train to find all the instances of fraudulent transactions (7000 +) and merged them with 10k records of non-fraudulent ones. We shuffled the data and ran the model with the grid search results.
+5. **Model 4:** Here, I created a balanced dataset. I used the X_train to find all the instances of fraudulent transactions (7000 +) and merged them with 10k records of non-fraudulent ones. I shuffled the data and ran the model with the grid search results.
 
-6. **Model 5:** Here, we assumed that categorical features didn’t provide meaningful information to the decision tree model and could potentially lead to confusion and clutter as opposed to focusing attention on details and accuracy. We went by the assumption due to the predict_proba results (we evaluated the x_test with predict proba and attached a y_test (is_fraud column) to compare the results with a histogram chart indicating inaccuracies). We ran all the previous models, including the logistic regression, and compared all the models to the best model found in the above three models.
+6. **Model 5:** Here, I assumed that categorical features didn’t provide meaningful information to the decision tree model and could potentially lead to confusion and clutter as opposed to focusing attention on details and accuracy. I went by the assumption due to the predict_proba results (I evaluated the x_test with predict proba and attached a y_test (is_fraud column) to compare the results with a histogram chart indicating inaccuracies). I ran all the previous models, including the logistic regression, and compared all the models to the best model found in the above three models.
    
-From the above models, we found that model 3 performed the best, with 0.9 recall score for Fraudulent transactions, 0.93 for non-fraudulent ones and an overall score of 0.93.
+From the above models, I found that model 3 performed the best, with 0.9 recall score for Fraudulent transactions, 0.93 for non-fraudulent ones and an overall score of 0.93.
 - Regarding precision, it’s important to note that the precision score for fraudulent transactions was low at 0.06, while it was 1 for non-fraudulent transactions. This discrepancy arises due to the dataset’s imbalance, predominantly comprising non-fraudulent transactions. Consequently, achieving a high precision score for fraudulent transactions is inherently challenging in such imbalanced datasets.
 
 **Our Scripts:**
